@@ -1,6 +1,6 @@
 Chess game using base Java
 
-Aims
+**Aims**
 
 Fully implemented rules of chess -WIP
 
