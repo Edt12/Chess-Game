@@ -1,12 +1,9 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-
-public class Piece extends JLabel implements MouseListener {
+abstract class Piece extends JLabel implements MouseListener {
     private ImageIcon image;
     private boolean isOrange;
-
     private boolean pressed;
     public boolean isPressed() {
         return pressed;
@@ -40,8 +37,6 @@ public class Piece extends JLabel implements MouseListener {
         } else {
             setIcon(yellowImage);
         }
-
-
     }
 
     /**
@@ -53,16 +48,16 @@ public class Piece extends JLabel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         setPressed(true);
+        System.out.println("Pressed");
     }
 
     /**
-     * Invoked when a mouse button has been pressed on a component.
+     * * Invoked when a mouse button has been pressed on a component.
      *
      * @param e the event to be processed
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     /**
@@ -72,7 +67,6 @@ public class Piece extends JLabel implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     /**
@@ -82,7 +76,6 @@ public class Piece extends JLabel implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     /**
@@ -92,8 +85,17 @@ public class Piece extends JLabel implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    public boolean checkMovement(int [] movementCoords){
+        System.out.println("Inherited Check");
+        return true;
+
+
 
     }
+
+
 }
 
 

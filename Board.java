@@ -5,11 +5,28 @@ import java.awt.*;
 Chess Board Class
  **/
 public class Board extends JFrame {
-    private final JPanel[][] graphicsGrid = new JPanel[8][8];
+    private final BlankSquare [][] blankSquares = new BlankSquare[8][8];
     private final Piece [][] pieces = new Piece[8][8];
 
+    /**
+     * Gets all pieces on the board
+     * @return 2-dimensional list of all pieces on board
+     */
     public Piece[][] getPieces(){
         return pieces;
+    }
+    public BlankSquare[][] getBlankSquares() {
+        return blankSquares;
+    }
+
+    /**
+     *Gets a specificied piece from board
+     * @param width x axis of piece in 2 dimensional pieces array
+     * @param height y axis of piece in 2 dimensional pieces array
+     * @return Piece
+     */
+    public Piece getPiece(int width , int height){
+        return pieces[width][height];
     }
     /**
      * Constructor for the Board Class
@@ -32,6 +49,7 @@ public class Board extends JFrame {
      * Creates an Array of BlankSquare's to visually represent chessboard and adds to JFrame
      */
     public void buildGrid() {
+
         int j = 0;
         int k = 0;
         boolean kReset = false;
@@ -44,23 +62,23 @@ public class Board extends JFrame {
             if (k % 2 == 0) {
                 if (j % 2 == 0) {
 
-                    graphicsGrid[j][k] = new BlankSquare(Color.BLACK);
+                    blankSquares[j][k] = new BlankSquare(Color.BLACK);
                 } else {
 
-                    graphicsGrid[j][k] = new BlankSquare(Color.WHITE);
+                    blankSquares[j][k] = new BlankSquare(Color.WHITE);
                 }
 
             } else {
                 if (j % 2 == 0) {
 
-                    graphicsGrid[j][k] = new BlankSquare(Color.WHITE);
+                    blankSquares[j][k] = new BlankSquare(Color.WHITE);
                 } else {
 
-                    graphicsGrid[j][k] = new BlankSquare(Color.BLACK);
+                    blankSquares[j][k] = new BlankSquare(Color.BLACK);
                 }
             }
 
-            add(graphicsGrid[j][k]);
+            add(blankSquares[j][k]);
 
 
             if (k == 7 && j != 7) {
@@ -95,6 +113,7 @@ public class Board extends JFrame {
         pieces[0][4] = new King(false);
         pieces[7][4] = new King(true);
 
+
         //Adding Queens
         pieces[0][3] = new Queen(false);
         pieces[7][3] = new Queen(true);
@@ -106,13 +125,15 @@ public class Board extends JFrame {
         pieces[7][5] = new Bishop(true);
 
         //Adding Rooks
-        pieces[0][1] = new Rook(false);
-        pieces[0][6] = new Rook(false);
-        pieces[7][1] = new Rook(true);
-        pieces[7][6] = new Rook(true);
+        pieces[0][1] = new Knight(false);
+        pieces[0][6] = new Knight(false);
+        pieces[7][1] = new Knight(true);
+        pieces[7][6] = new Knight(true);
 
 
-    }
+        }
+
+
 
     /**
      * Adds images from pieces to the screen
@@ -120,11 +141,11 @@ public class Board extends JFrame {
     public void addPiecesToScreen() {
         int j = 0;
         int k = 0;
-
         for (int i = 0; i < 64; i++) {
             boolean reset = false;
             if (pieces[k][j] != null) {
-                graphicsGrid[k][j].add(pieces[k][j]);
+                blankSquares[k][j].removeAll();
+                blankSquares[k][j].add(pieces[k][j]);
             }
             if (j == 7) {
                 k++;
@@ -135,24 +156,26 @@ public class Board extends JFrame {
                 j++;
             }
 
-            System.out.println(k + "width");
-            System.out.println(j + "length");
         }
-
     }
 
     /**
      * Move pieces method
       */
-    public void movePieces(int xCoordOne,int yCoordOne , int xCoordTwo, int yCoordTwo){
-      Piece temp = pieces[xCoordOne][yCoordOne];
-      pieces[xCoordOne][yCoordOne] = null;
-      pieces[xCoordTwo][yCoordTwo] = temp;
-      addPiecesToScreen();
-   }
+    public void movePieces(int[] coordsArray){
+        System.out.println("Moving Pieces Start");
+        int yCoordOne = coordsArray[0];
+        int yCoordTwo = coordsArray[2];
+        int xCoordOne = coordsArray[1];
+        int xCoordTwo = coordsArray[3];
+
+        Piece temp = pieces[yCoordOne][xCoordOne];
+        pieces[yCoordOne][xCoordOne] = null;
+        pieces[yCoordTwo][xCoordTwo] = temp;
+        addPiecesToScreen();
+        repaint();
+    }
 
 }
-
-
 
 
