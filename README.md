@@ -2,11 +2,13 @@ Chess game using base Java
 
 **Aims**
 
-Fully implemented rules of chess -90% Done -Castling and En Passen still to be added
-
-Have an opponent play chess against player to an acceptable standard -Not started Yet
+Fully implemented rules of chess-Done
 
 Have a working gui to show the game -Done
+
+**Stretch goals possibly to be completed in future**
+
+Have an opponent play chess against player to an acceptable standard -Not started Yet
 
 Please excuse drawing of chess pieces I am not an artist
 
